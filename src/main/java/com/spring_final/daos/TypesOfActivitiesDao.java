@@ -1,10 +1,8 @@
 package com.spring_final.daos;
 
-import com.spring_final.configuration.HibernateDriver;
 import com.spring_final.model.TypeOfActivity;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;

@@ -22,7 +22,6 @@ public class GetActivities {
                                       @RequestParam(value = "sort", defaultValue = "by-name") String sort){
         ModelAndView mv = new ModelAndView();
 
-        //ActivityService service = new ActivityService();
         int numberOfActivities = service.getNumberOfActivities();
         int totalPages = (int) Math.ceil((double) numberOfActivities /
                 (double) size);

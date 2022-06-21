@@ -17,7 +17,6 @@ public class GetActivity {
    @RequestMapping("/getActivityById")
     public ModelAndView getActivity(@RequestParam("id") int id){
         ModelAndView mv = new ModelAndView();
-        //ActivityService service = new ActivityService();
         Activity activity = service.getActivity(id);
         mv.addObject("activity", activity);
         mv.setViewName("activityPage");
@@ -27,7 +26,6 @@ public class GetActivity {
     @RequestMapping("/getActivityByName")
     public ModelAndView getActivity(@RequestParam("name") String name){
         ModelAndView mv = new ModelAndView();
-        ActivityService service = new ActivityService();
         Activity activity = service.getActivity(name);
         mv.addObject("activity", activity);
         mv.setViewName("/WEB-INF/pages/activities");

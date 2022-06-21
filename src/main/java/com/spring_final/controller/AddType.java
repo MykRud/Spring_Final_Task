@@ -19,13 +19,9 @@ public class AddType {
     public String addType(@ModelAttribute("type")TypeOfActivity type){
         if(type.getName() == null)
             return "WEB-INF/pages/admin/add-type";
-        //TypeOfActivityService service = new TypeOfActivityService();
-
         if(service.findType(type.getName()) != null)
             return "WEB-INF/pages/admin/add-type";
-
         service.addType(type);
-
         return "redirect:/activities";
     }
 

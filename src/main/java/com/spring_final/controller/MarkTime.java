@@ -17,16 +17,13 @@ public class MarkTime {
     ActivityService service;
 
     @RequestMapping("/markTime")
-    public String markTime(@RequestParam("activityId") int activityId,
+    public String markTime(@RequestParam("activity_id") int activityId,
                            @RequestParam("days") int days,
                            @RequestParam("hours") int hours,
                            @RequestParam("minutes") int minutes,
                            HttpSession session){
 
         User user = (User) session.getAttribute("authUser");
-
-        //ActivityService service = new ActivityService();
-
         Activity activity = service.getActivity(activityId);
 
         boolean canMatkTime = false;

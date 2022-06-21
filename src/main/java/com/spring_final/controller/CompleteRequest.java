@@ -20,13 +20,9 @@ public class CompleteRequest {
     ActivityRequestService requestService;
 
     @RequestMapping("/activityRequestComplete")
-    public String completeRequest(@RequestParam("activityId") int activityId, HttpSession session){
+    public String completeRequest(@RequestParam("activity_id") int activityId, HttpSession session){
         User user = (User) session.getAttribute("authUser");
-
-        //ActivityService activityService = new ActivityService();
         Activity activity = activityService.getActivity(activityId);
-
-        //ActivityRequestService requestService = new ActivityRequestService();
         requestService.makeCompleteRequest(user, activity);
 
         return "redirect:/activities";

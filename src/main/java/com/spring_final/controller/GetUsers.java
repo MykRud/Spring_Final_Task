@@ -21,9 +21,6 @@ public class GetUsers {
     @RequestMapping("/users")
     public ModelAndView getUsers(){
         ModelAndView mv = new ModelAndView();
-
-        //UserService service = new UserService();
-
         List<User> users = service.getUsers();
 
         mv.addObject("users", users);

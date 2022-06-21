@@ -26,7 +26,6 @@ public class Login {
         String password = user.getPassword();
         if(username == null || password == null)
             return "login";
-        //UserService service = new UserService();
         User us = service.getUser(username);
 
         if(us == null){

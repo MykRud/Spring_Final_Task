@@ -23,7 +23,6 @@ public class GetRequests {
                                       @RequestParam(value = "size", defaultValue = "5") int size){
         ModelAndView mv = new ModelAndView();
 
-        //ActivityRequestService requestService = new ActivityRequestService();
         int numberOfRequests = requestService.getNumberOfRequests();
         int totalPages = (int) Math.ceil((double) numberOfRequests /
                 (double) size);

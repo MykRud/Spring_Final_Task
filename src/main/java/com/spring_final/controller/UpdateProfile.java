@@ -25,7 +25,6 @@ public class UpdateProfile {
                 user.getContact() == null)
             return "WEB-INF/pages/profile-update";
 
-        //UserService service = new UserService();
         user.setId(((User) session.getAttribute("authUser")).getId());
         service.updateUser(user);
 

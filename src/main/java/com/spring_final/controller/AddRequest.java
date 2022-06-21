@@ -22,13 +22,8 @@ public class AddRequest {
     @RequestMapping("/activityRequestAdd")
     public String addRequest(@RequestParam("activity_id") int activityId, HttpSession session){
         User user = (User) session.getAttribute("authUser");
-
-        //ActivityService activityService = new ActivityService();
         Activity activity = activityService.getActivity(activityId);
-
-        //ActivityRequestService requestService = new ActivityRequestService();
         requestService.makeAddRequest(user, activity);
-
         return "redirect:/activities";
 
     }

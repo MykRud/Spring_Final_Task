@@ -15,7 +15,6 @@ public class ApproveRequest {
 
     @RequestMapping("/activityRequestApprove")
     public String approveRequest(@RequestParam("id") int id){
-       // ActivityRequestService service = new ActivityRequestService();
         ActivityRequest request = service.getRequest(id);
 
         if(!request.getStatus().equals("Pending")){

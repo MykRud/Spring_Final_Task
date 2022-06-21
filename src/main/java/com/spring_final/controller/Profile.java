@@ -18,7 +18,6 @@ public class Profile {
     @RequestMapping("/profile")
     public ModelAndView profile(HttpSession session){
         User user = (User) session.getAttribute("authUser");
-        //UserService service = new UserService();
         user = service.getUser(user.getId());
         ModelAndView mv = new ModelAndView();
         mv.addObject("user", user);

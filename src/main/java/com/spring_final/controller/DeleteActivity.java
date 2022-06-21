@@ -14,7 +14,6 @@ public class DeleteActivity {
 
     @RequestMapping("/activityDelete")
     public String deleteActivity(@RequestParam("id") int id){
-        //ActivityService service = new ActivityService();
         service.deleteActivity(id);
         return "redirect:/activities";
     }

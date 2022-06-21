@@ -15,7 +15,6 @@ public class DeleteUser {
 
     @RequestMapping("/userDelete")
     public String deleteUser(@RequestParam("id") int id){
-        //UserService service = new UserService();
 
         if(service.getUser(id) == null)
             return "WEB-INF/pages/admin/users";

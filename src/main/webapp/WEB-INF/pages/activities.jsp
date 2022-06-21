@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="timeManage" uri="time-management" %>
 
@@ -131,24 +132,27 @@
                                 <p>
                                     <span><fmt:message key="activities.activity.duration"/></span>
                                     <span>
-                                        ${activity.duration/60/24}
+                                        <fmt:formatNumber var="days" value="${activity.duration/60/24}" minFractionDigits='0' maxFractionDigits='0' />
+                                        ${days}
                                     </span>
                                     <span><fmt:message key="activities.activity.duration.days"/></span>
                                     <span>
-                                        ${activity.duration/60 - activity.duration / 60 / 24 * 24}
+                                        <fmt:formatNumber var="hours" value="${activity.duration/60 - days*24}" minFractionDigits='0' maxFractionDigits='0' />
+                                        ${hours}
                                     </span>
                                     <span><fmt:message key="activities.activity.duration.hours"/></span>
                                     <span>
-                                        ${activity.duration - (activity.duration / 60 / 24 * 24 * 60) - (activity.duration / 60 - activity.duration / 60 / 24 * 24) * 60}
+                                        <fmt:formatNumber var = "minutes" value='${activity.duration - hours*60 - days*24*60}' minFractionDigits='0' maxFractionDigits='0' />
+                                        ${minutes}
                                     </span>
                                     <span><fmt:message key="activities.activity.duration.minutes"/></span>
                                 </p>
-                                <!--<p>
+                                <p>
                                     <span><fmt:message key="activities.activity.users"/></span>
                                     <c:forEach items="${users}" var="user">
                                         <span>${username}</span><span>;</span>
                                     </c:forEach>
-                                </p>-->
+                                </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div aria-label="btn-group" class="btn-group" role="group">
                                         <timeManage:authorityCheck auth="ADMIN">

@@ -22,7 +22,6 @@ public class Registration {
         user.getContact() == null)
             return "registration";
 
-        //UserService service = new UserService();
         User foundUser = service.getUser(user.getUsername());
 
         if(foundUser != null)

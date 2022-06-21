@@ -21,7 +21,6 @@ public class UpdateUser {
                 user.getContact() == null)
             return "WEB-INF/pages/admin/update-user";
 
-        //UserService service = new UserService();
         User foundUser = service.getUser(user.getId());
         user.setPassword(foundUser.getPassword());
 
