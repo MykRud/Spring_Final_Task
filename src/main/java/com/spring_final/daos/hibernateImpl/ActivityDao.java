@@ -1,4 +1,4 @@
-package com.spring_final.daos;
+package com.spring_final.daos.hibernateImpl;
 
 import com.spring_final.model.Activity;
 import com.spring_final.model.TypeOfActivity;
@@ -7,6 +7,7 @@ import com.spring_final.service.UserService;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -109,7 +110,7 @@ public class ActivityDao {
 
    public void delete(int id){
       Activity activity = getActivity(id);
-      sessionFactory.getCurrentSession().remove(activity);
+      sessionFactory.getCurrentSession().delete(activity);
    }
 
    public void update(Activity activity){

@@ -16,7 +16,7 @@ public class Authority implements Serializable{
         ADMIN, USER
     }
 
-    @ManyToMany(mappedBy = "authorities", fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
 
     @Transient

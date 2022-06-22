@@ -1,8 +1,6 @@
 package com.spring_final.controller;
 
-import com.spring_final.model.Activity;
 import com.spring_final.model.User;
-import com.spring_final.service.ActivityService;
 import com.spring_final.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +24,7 @@ public class UpdateProfile {
             return "WEB-INF/pages/profile-update";
 
         user.setId(((User) session.getAttribute("authUser")).getId());
-        service.updateUser(user);
+        service.updateProfile(user);
 
         return "redirect:/profile";
     }

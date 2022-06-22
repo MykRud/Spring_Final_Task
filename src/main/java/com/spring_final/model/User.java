@@ -23,21 +23,14 @@ public class User implements Serializable{
     private int age;
     private String contact;
     private String gender;
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-   // @JoinTable(
-     //       name = "User_Authority",
-       //     joinColumns = { @JoinColumn(name = "users_id") },
-         //   inverseJoinColumns = { @JoinColumn(name = "authorities_id") }
-    //)
+
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     public Set<Authority> authorities = new HashSet<>();
-    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    //@JoinTable(
-      //      name = "activity_user",
-        //    joinColumns = { @JoinColumn(name = "users_id") },
-          //  inverseJoinColumns = { @JoinColumn(name = "activities_id") }
-    //)
+
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private Set<Activity> activities = new HashSet<>();
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade=CascadeType.REMOVE)
     private Set<ActivityRequest> activityRequests = new HashSet<>();
 
     public User(int id, String firstName, String lastName, String username, String password, int age, String contact, String gender) {

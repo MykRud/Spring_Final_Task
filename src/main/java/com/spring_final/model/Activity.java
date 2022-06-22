@@ -19,11 +19,14 @@ public class Activity implements Serializable {
     private int duration;
     private Date startTime;
     private Date endTime;
-    @ManyToOne(cascade=CascadeType.ALL)
+
+    @ManyToOne
     private TypeOfActivity type;
-    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<User> users = new ArrayList<>();
-    @OneToMany(mappedBy = "activity", cascade=CascadeType.ALL)
+
+    @OneToMany(mappedBy = "activity", cascade=CascadeType.REMOVE)
     private List<ActivityRequest> activityRequests = new ArrayList<>();
 
     public Activity() {

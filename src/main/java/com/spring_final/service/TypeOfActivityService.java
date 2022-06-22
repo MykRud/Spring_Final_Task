@@ -1,10 +1,9 @@
 package com.spring_final.service;
 
-import com.spring_final.daos.TypesOfActivitiesDao;
+import com.spring_final.daos.hibernateImpl.TypesOfActivitiesDao;
 import com.spring_final.model.TypeOfActivity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

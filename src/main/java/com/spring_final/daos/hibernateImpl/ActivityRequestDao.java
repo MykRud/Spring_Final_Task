@@ -1,4 +1,4 @@
-package com.spring_final.daos;
+package com.spring_final.daos.hibernateImpl;
 
 import com.spring_final.model.Activity;
 import com.spring_final.model.ActivityRequest;

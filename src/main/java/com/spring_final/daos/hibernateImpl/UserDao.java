@@ -1,4 +1,4 @@
-package com.spring_final.daos;
+package com.spring_final.daos.hibernateImpl;
 
 import com.spring_final.model.Authority;
 import com.spring_final.model.User;
@@ -61,7 +61,9 @@ public class UserDao {
 
     public void delete(int id){
         User user = getUser(id);
-        sessionFactory.getCurrentSession().remove(user);
+        deleteAuthorities(id);
+        deleteActivities(id);
+        sessionFactory.getCurrentSession().delete(user);
     }
 
     public void update(User user){
@@ -69,10 +71,22 @@ public class UserDao {
     }
 
     public void setAuthority(int userId, Authority authority) {
-        sessionFactory.getCurrentSession().createSQLQuery("INSERT INTO user_authority(users_id, authorities_id) VALUES" +
-                "(:user_id, :authority_id)")
-                .setParameter("user_id", userId)
-                .setParameter("authority_id", authority.getId())
+        sessionFactory.getCurrentSession().createSQLQuery("INSERT INTO authority_user(authorities_id, users_id) VALUES" +
+                "(:authorities_id, :users_id)")
+                .setParameter("authorities_id", authority.getId())
+                .setParameter("users_id", userId)
+                .executeUpdate();
+    }
+
+    public void deleteAuthorities(int userId) {
+        sessionFactory.getCurrentSession().createSQLQuery("DELETE FROM authority_user WHERE users_id=:userId")
+                .setParameter("userId", userId)
+                .executeUpdate();
+    }
+
+    public void deleteActivities(int userId){
+        sessionFactory.getCurrentSession().createSQLQuery("DELETE FROM activity_user WHERE users_id=:userId")
+                .setParameter("userId", userId)
                 .executeUpdate();
     }
 }

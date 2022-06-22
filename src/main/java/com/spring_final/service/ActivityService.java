@@ -1,11 +1,10 @@
 package com.spring_final.service;
 
-import com.spring_final.daos.ActivityDao;
+import com.spring_final.daos.hibernateImpl.ActivityDao;
 import com.spring_final.model.Activity;
 import com.spring_final.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;

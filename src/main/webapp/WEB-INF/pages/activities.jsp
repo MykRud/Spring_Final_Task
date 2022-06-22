@@ -157,8 +157,8 @@
                                 </p>
                                 <p>
                                     <span><fmt:message key="activities.activity.users"/></span>
-                                    <c:forEach items="${users}" var="user">
-                                        <span>${username}</span><span>;</span>
+                                    <c:forEach items="${activity.users}" var="user">
+                                        <span>${user.username}</span><span>;</span>
                                     </c:forEach>
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">

@@ -13,10 +13,9 @@ public class TypeOfActivity implements Serializable{
     @GeneratedValue
     private int id;
     private String name;
-    @OneToMany(mappedBy = "type", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+
+    @OneToMany(mappedBy = "type", fetch = FetchType.EAGER)
     private List<Activity> activities = new ArrayList<>();
-
-
 
     public TypeOfActivity(int id, String name) {
         this.id = id;

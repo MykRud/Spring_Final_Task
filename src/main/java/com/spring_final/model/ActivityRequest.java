@@ -9,9 +9,9 @@ public class ActivityRequest implements Serializable{
     @Id
     @GeneratedValue
     private int id;
-    @ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Activity activity;
-    @ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
     private String action;
     private String status;

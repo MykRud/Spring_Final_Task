@@ -13,7 +13,7 @@ public class DeleteActivity {
     ActivityService service;
 
     @RequestMapping("/activityDelete")
-    public String deleteActivity(@RequestParam("id") int id){
+    public String deleteActivity(@RequestParam("activity_id") int id){
         service.deleteActivity(id);
         return "redirect:/activities";
     }

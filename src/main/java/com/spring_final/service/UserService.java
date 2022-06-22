@@ -1,17 +1,15 @@
 package com.spring_final.service;
 
-import com.spring_final.daos.ActivityDao;
-import com.spring_final.daos.ActivityRequestDao;
-import com.spring_final.daos.TypesOfActivitiesDao;
-import com.spring_final.daos.UserDao;
+import com.spring_final.daos.hibernateImpl.ActivityDao;
+import com.spring_final.daos.hibernateImpl.ActivityRequestDao;
+import com.spring_final.daos.hibernateImpl.TypesOfActivitiesDao;
+import com.spring_final.daos.hibernateImpl.UserDao;
 import com.spring_final.model.Authority;
 import com.spring_final.model.User;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 
@@ -32,7 +30,7 @@ public class UserService {
         userDao.addUser(user);
         User foundUser = getUser(user.getUsername());
         if(foundUser != null)
-            setAuthority(foundUser.getId(), Authority.getUserAuthority());
+            setAuthority(foundUser, Authority.getUserAuthority());
     }
 
     public User getUser(int id){
@@ -59,7 +57,7 @@ public class UserService {
         userDao.delete(id);
     }
 
-    public void updateUser(User user){
+    public void updateProfile(User user){
         User foundUser = getUser(user.getId());
         user.setGender(foundUser.getGender());
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(10)));
@@ -67,14 +65,20 @@ public class UserService {
         userDao.update(user);
     }
 
-    public void setAuthority(int userId, Authority authority){
-        User user = userDao.getUser(userId);
+    public void updateUser(User user){
+        User foundUser = getUser(user.getId());
+        user.setPassword(foundUser.getPassword());
+        user.setAuthorities(foundUser.getAuthorities());
+        userDao.update(user);
+    }
+
+    public void setAuthority(User user, Authority authority){
         Set<Authority> authorities = user.getAuthorities();
         for(Authority currentAuthority : authorities){
             if(currentAuthority == authority)
                 return;
         }
-        userDao.setAuthority(userId, authority);
+        userDao.setAuthority(user.getId(), authority);
     }
 
     public void deleteAuthority(int userId, Authority authority){

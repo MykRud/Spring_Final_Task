@@ -1,15 +1,12 @@
 package com.spring_final.service;
 
-import com.spring_final.daos.ActivityDao;
-import com.spring_final.daos.ActivityRequestDao;
-import com.spring_final.daos.UserDao;
+import com.spring_final.daos.hibernateImpl.ActivityDao;
+import com.spring_final.daos.hibernateImpl.ActivityRequestDao;
 import com.spring_final.model.Activity;
 import com.spring_final.model.ActivityRequest;
 import com.spring_final.model.User;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
