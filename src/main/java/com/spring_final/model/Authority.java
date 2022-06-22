@@ -10,24 +10,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Authority {
+public class Authority implements Serializable{
 
     public enum AuthorityEnum{
         ADMIN, USER
     }
 
-    @ManyToMany(mappedBy = "authorities", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToMany(mappedBy = "authorities", fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
     private Set<User> users = new HashSet<>();
 
     @Transient
-    private static final Authority ADMIN = new Authority();
-    @Transient
     private static final Authority USER = new Authority();
+    @Transient
+    private static final Authority ADMIN = new Authority();
     static {
-        ADMIN.setAuthority(AuthorityEnum.ADMIN);
-        ADMIN.setId(1);
         USER.setAuthority(AuthorityEnum.USER);
-        USER.setId(2);
+        USER.setId(1);
+        ADMIN.setAuthority(AuthorityEnum.ADMIN);
+        ADMIN.setId(2);
     }
 
     @Id

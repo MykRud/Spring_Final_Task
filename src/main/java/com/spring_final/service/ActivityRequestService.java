@@ -2,13 +2,16 @@ package com.spring_final.service;
 
 import com.spring_final.daos.ActivityDao;
 import com.spring_final.daos.ActivityRequestDao;
+import com.spring_final.daos.UserDao;
 import com.spring_final.model.Activity;
 import com.spring_final.model.ActivityRequest;
 import com.spring_final.model.User;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -39,10 +42,14 @@ public class ActivityRequestService {
     }
 
     public void makeAddRequest(User user, Activity activity){
-        ActivityRequest request = requestDao.getRequestByUserAndActivity(user, activity);
+        List<ActivityRequest> requests = requestDao.getRequestByUserAndActivity(user, activity);
 
-        if(request != null)
-            return;
+        if(!requests.isEmpty()) {
+            for (ActivityRequest currentRequest : requests) {
+                if (!currentRequest.getAction().equals("Add") && !currentRequest.getStatus().equals("Rejected"))
+                    return;
+            }
+        }
 
         if(activity.getStatus().equals("Completed")){
             return;
@@ -50,8 +57,8 @@ public class ActivityRequestService {
         else if(activity.getStatus().equals("Active")){
             return;
         }
+        ActivityRequest request = new ActivityRequest();
 
-        request = new ActivityRequest();
         request.setUser(user);
         request.setActivity(activity);
         request.setAction("Add");
@@ -60,26 +67,32 @@ public class ActivityRequestService {
         requestDao.addRequest(request);
     }
 
+    @Transactional
     public void makeCompleteRequest(User user, Activity activity) {
-        ActivityRequest request = requestDao.getRequestByUserAndActivity(user, activity);
 
-        if (request == null)
-            return;
+        List<ActivityRequest> requests = requestDao.getRequestByUserAndActivity(user, activity); // Error is here!!!
 
-        if (activity.getStatus().equals("Completed")){
+        if(requests.isEmpty())
             return;
-        } else if(activity.getStatus().equals("Pending")){
+        for(ActivityRequest currentRequest : requests){
+            if(currentRequest.getAction().equals("Complete") && !currentRequest.getStatus().equals("Rejected")
+                    || currentRequest.getAction().equals("Add") && currentRequest.getStatus().equals("Pending"))
+                return;
+        }
+
+        if(activity.getStatus().equals("Completed")){
             return;
         }
-        else if(activity.getStatus().equals("Active")){
-            request = new ActivityRequest();
-            request.setUser(user);
-            request.setActivity(activity);
-            request.setAction("Complete");
-            request.setStatus("Pending");
+        else if(activity.getStatus().equals("Pending"))
+            return;
+        ActivityRequest request = new ActivityRequest();
+        request.setUser(user);
+        request.setActivity(activity);
+        request.setAction("Complete");
+        request.setStatus("Pending");
 
-            requestDao.addRequest(request);
-        }
+        requestDao.addRequest(request);
+
     }
 
     public void approveRequest(ActivityRequest request){

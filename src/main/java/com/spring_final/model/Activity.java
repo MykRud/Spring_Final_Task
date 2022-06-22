@@ -2,12 +2,13 @@ package com.spring_final.model;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Activity {
+public class Activity implements Serializable {
 
     @Id
     @GeneratedValue
@@ -20,7 +21,7 @@ public class Activity {
     private Date endTime;
     @ManyToOne(cascade=CascadeType.ALL)
     private TypeOfActivity type;
-    @ManyToMany(mappedBy = "activities", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<User> users = new ArrayList<>();
     @OneToMany(mappedBy = "activity", cascade=CascadeType.ALL)
     private List<ActivityRequest> activityRequests = new ArrayList<>();

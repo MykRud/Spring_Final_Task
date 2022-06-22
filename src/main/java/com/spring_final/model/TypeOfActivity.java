@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 
 @Entity
-public class TypeOfActivity {
+public class TypeOfActivity implements Serializable{
     @Id
     @GeneratedValue
     private int id;

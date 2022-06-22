@@ -5,13 +5,13 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 
 @Entity
-public class ActivityRequest {
+public class ActivityRequest implements Serializable{
     @Id
     @GeneratedValue
     private int id;
-    @ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
     private Activity activity;
-    @ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
     private User user;
     private String action;
     private String status;

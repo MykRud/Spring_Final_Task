@@ -2,6 +2,7 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="timeManage" uri="time-management" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="i18n.messages"/>
@@ -132,17 +133,24 @@
                                 <p>
                                     <span><fmt:message key="activities.activity.duration"/></span>
                                     <span>
-                                        <fmt:formatNumber var="days" value="${activity.duration/60/24}" minFractionDigits='0' maxFractionDigits='0' />
+                                        
+                                        <c:set var="daysF"
+                                        value="${Math.floor( activity.duration/60/24 )}"/>
+                                        <fmt:formatNumber var="days" type="number" value="${daysF}" maxFractionDigits="0"/>
                                         ${days}
                                     </span>
                                     <span><fmt:message key="activities.activity.duration.days"/></span>
                                     <span>
-                                        <fmt:formatNumber var="hours" value="${activity.duration/60 - days*24}" minFractionDigits='0' maxFractionDigits='0' />
+                                         <c:set var="hoursF"
+                                        value="${Math.floor( activity.duration/60 - days*24 )}"/>
+                                        <fmt:formatNumber var="hours" type="number" value="${hoursF}" maxFractionDigits="0"/>
                                         ${hours}
                                     </span>
                                     <span><fmt:message key="activities.activity.duration.hours"/></span>
                                     <span>
-                                        <fmt:formatNumber var = "minutes" value='${activity.duration - hours*60 - days*24*60}' minFractionDigits='0' maxFractionDigits='0' />
+                                        <c:set var="minutesF"
+                                        value="${Math.floor( activity.duration - hours*60 - days*24*60 )}"/>
+                                        <fmt:formatNumber var="minutes" type="number" value="${minutesF}" maxFractionDigits="0"/>
                                         ${minutes}
                                     </span>
                                     <span><fmt:message key="activities.activity.duration.minutes"/></span>

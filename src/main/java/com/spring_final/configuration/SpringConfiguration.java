@@ -28,7 +28,7 @@ public class SpringConfiguration {
     public DataSource dataSource(){
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/springfinaltaskdb");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/anotheronetestspringdb");
         dataSource.setUsername("root");
         dataSource.setPassword("MR!QAZ2wsx");
 
@@ -46,7 +46,7 @@ public class SpringConfiguration {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
         hibernateProperties.setProperty(
-                "hibernate.dialect", "org.hibernate.dialect.MySQL55Dialect");
+                "hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
         return hibernateProperties;
     }
 

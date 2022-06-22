@@ -17,6 +17,8 @@ public class ActivityRequestDao {
 
     @Autowired
     private SessionFactory sessionFactory;
+    @Autowired
+    private UserDao userDao;
 
     public void addRequest(ActivityRequest request){
         sessionFactory.getCurrentSession().save(request);
@@ -28,26 +30,26 @@ public class ActivityRequestDao {
         return request;
     }
 
-    public ActivityRequest getRequestByUserAndActivity(User user, Activity activity){
-        ActivityRequest request = (ActivityRequest) sessionFactory.getCurrentSession().createQuery("FROM ActivityRequest WHERE user_id = :userId AND activity_id = :activityId")
+    public List<ActivityRequest> getRequestByUserAndActivity(User user, Activity activity){
+        List<ActivityRequest> requests = (List<ActivityRequest>) sessionFactory.getCurrentSession().createQuery("FROM ActivityRequest WHERE user_id = :userId AND activity_id = :activityId")
                 .setParameter("userId", user.getId())
                 .setParameter("activityId", activity.getId())
-                .uniqueResult();
-        return request;
+                .getResultList();
+        return requests;
     }
 
-    public ActivityRequest getRequestByUser(User user){
-        ActivityRequest request = (ActivityRequest) sessionFactory.getCurrentSession().createQuery("FROM ActivityRequest WHERE user_id = :userId")
+    public List<ActivityRequest> getRequestByUser(User user){
+        List<ActivityRequest> requests = (List<ActivityRequest>) sessionFactory.getCurrentSession().createQuery("FROM ActivityRequest WHERE user_id = :userId")
                 .setParameter("userId", user.getId())
                 .uniqueResult();
-        return request;
+        return requests;
     }
 
-    public ActivityRequest getRequestByActivity(Activity activity){
-        ActivityRequest request = (ActivityRequest) sessionFactory.getCurrentSession().createQuery("FROM ActivityRequest WHERE activity_id = :activityId")
+    public List<ActivityRequest> getRequestByActivity(Activity activity){
+        List<ActivityRequest> requests = (List<ActivityRequest>) sessionFactory.getCurrentSession().createQuery("FROM ActivityRequest WHERE activity_id = :activityId")
                 .setParameter("activityId", activity.getId())
                 .uniqueResult();
-        return request;
+        return requests;
     }
 
     public List<ActivityRequest> getRequests(){
@@ -62,13 +64,15 @@ public class ActivityRequestDao {
     }
 
     public void delete(Activity activity){
-        ActivityRequest request = getRequestByActivity(activity);
-        sessionFactory.getCurrentSession().remove(request);
+        List<ActivityRequest> requests = getRequestByActivity(activity);
+        for(ActivityRequest request : requests)
+            sessionFactory.getCurrentSession().remove(request);
     }
 
     public void delete(User user){
-        ActivityRequest request = getRequestByUser(user);
-        sessionFactory.getCurrentSession().remove(request);
+        List<ActivityRequest> requests = getRequestByUser(user);
+        for(ActivityRequest request : requests)
+            sessionFactory.getCurrentSession().remove(request);
     }
 
     public List<ActivityRequest> getRequestsInLimit(int size, int page) {

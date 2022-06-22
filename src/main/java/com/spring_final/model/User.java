@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.*;
 
 @Entity
-public class User {
+public class User implements Serializable{
 
     @Id
     @GeneratedValue
@@ -24,18 +24,18 @@ public class User {
     private String contact;
     private String gender;
     @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinTable(
-            name = "User_Authority",
-            joinColumns = { @JoinColumn(name = "users_id") },
-            inverseJoinColumns = { @JoinColumn(name = "authorities_id") }
-    )
+   // @JoinTable(
+     //       name = "User_Authority",
+       //     joinColumns = { @JoinColumn(name = "users_id") },
+         //   inverseJoinColumns = { @JoinColumn(name = "authorities_id") }
+    //)
     public Set<Authority> authorities = new HashSet<>();
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinTable(
-            name = "activity_user",
-            joinColumns = { @JoinColumn(name = "users_id") },
-            inverseJoinColumns = { @JoinColumn(name = "activities_id") }
-    )
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    //@JoinTable(
+      //      name = "activity_user",
+        //    joinColumns = { @JoinColumn(name = "users_id") },
+          //  inverseJoinColumns = { @JoinColumn(name = "activities_id") }
+    //)
     private Set<Activity> activities = new HashSet<>();
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Set<ActivityRequest> activityRequests = new HashSet<>();
