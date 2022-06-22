@@ -12,8 +12,8 @@ import java.util.List;
 @Transactional
 public class TypesOfActivitiesDao {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    //@Autowired
+    private SessionFactory sessionFactory = null;
 
     public void addType(TypeOfActivity type){
         sessionFactory.getCurrentSession().save(type);

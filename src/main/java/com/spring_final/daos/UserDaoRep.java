@@ -1,25 +1,31 @@
 package com.spring_final.daos;
 
+import com.spring_final.model.Activity;
 import com.spring_final.model.Authority;
 import com.spring_final.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
+@Repository
+@Transactional
 public interface UserDaoRep extends JpaRepository<User, Integer> {
 
     @Override
     List<User> findAll();
 
-    User findById();
+    @Override
+    User getOne(Integer integer);
 
-    User findByUsername();
-
-
+    User getByUsername(String username);
 
     @Override
     Page<User> findAll(Pageable pageable);
@@ -30,14 +36,15 @@ public interface UserDaoRep extends JpaRepository<User, Integer> {
     @Override
     void delete(User entity);
 
-    void update(User entity);
 
-    @Query("INSERT INTO authority_user(authorities_id, users_id) VALUES(:authorityId, :userId)")
+    @Modifying
+    @Query(value = "INSERT INTO authority_user(authorities_id, users_id) VALUES (:authorityId, :userId)", nativeQuery = true)
     void setAuthority(@Param("userId") int userId, @Param("authorityId") int authorityId);
 
-    @Query("DELETE FROM authority_user WHERE users_id=:userId")
+    @Modifying
+    @Query(value = "DELETE FROM authority_user WHERE users_id=:userId", nativeQuery = true)
     void deleteAuthorities(@Param("userId") int userId);
 
     @Override
-    void deleteAllById(Iterable<? extends Integer> integers);
+    void deleteById(Integer integer);
 }

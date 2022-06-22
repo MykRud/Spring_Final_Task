@@ -1,5 +1,7 @@
 package com.spring_final.service;
 
+import com.spring_final.daos.ActivityDaoRep;
+import com.spring_final.daos.ActivityRequestDaoRep;
 import com.spring_final.daos.hibernateImpl.ActivityDao;
 import com.spring_final.daos.hibernateImpl.ActivityRequestDao;
 import com.spring_final.model.Activity;
@@ -18,28 +20,28 @@ import java.util.List;
 public class ActivityRequestService {
 
     @Autowired
-    private ActivityRequestDao requestDao;
+    private ActivityRequestDaoRep requestDao;
     @Autowired
-    private ActivityDao activityDao;
+    private ActivityDaoRep activityDao;
 
     public void addRequest(ActivityRequest request){
-        requestDao.addRequest(request);
+        requestDao.save(request);
     }
 
     public ActivityRequest getRequest(int id){
-        return requestDao.getRequest(id);
+        return requestDao.getOne(id);
     }
 
     public int getNumberOfRequests(){
-        return requestDao.getNumberOfRequests();
+        return 10;
     }
 
-    public List<ActivityRequest> getRequestsInLimit(int size, int page){
-        return requestDao.getRequestsInLimit(size, page);
-    }
+    //public List<ActivityRequest> getRequestsInLimit(int size, int page){
+      //  return requestDao.getRequestsInLimit(size, page);
+    //}
 
     public void makeAddRequest(User user, Activity activity){
-        List<ActivityRequest> requests = requestDao.getRequestByUserAndActivity(user, activity);
+        List<ActivityRequest> requests = requestDao.findByUserIdAndActivityId(user.getId(), activity.getId());
 
         if(!requests.isEmpty()) {
             for (ActivityRequest currentRequest : requests) {
@@ -61,13 +63,13 @@ public class ActivityRequestService {
         request.setAction("Add");
         request.setStatus("Pending");
 
-        requestDao.addRequest(request);
+        requestDao.save(request);
     }
 
     @Transactional
     public void makeCompleteRequest(User user, Activity activity) {
 
-        List<ActivityRequest> requests = requestDao.getRequestByUserAndActivity(user, activity); // Error is here!!!
+        List<ActivityRequest> requests = requestDao.findByUserIdAndActivityId(user.getId(), activity.getId()); // Error is here!!!
 
         if(requests.isEmpty())
             return;
@@ -88,7 +90,7 @@ public class ActivityRequestService {
         request.setAction("Complete");
         request.setStatus("Pending");
 
-        requestDao.addRequest(request);
+        requestDao.save(request);
 
     }
 
@@ -106,18 +108,18 @@ public class ActivityRequestService {
             user.getActivities().add(activity);
             request.setStatus("Approved");
 
-            activityDao.update(activity);
+            activityDao.save(activity);
         } else if(status.equals("Active")){
             activity.getUsers().add(user);
             user.getActivities().add(activity);
             request.setStatus("Approved");
 
-            activityDao.update(activity);
+            activityDao.save(activity);
         } else if(status.equals("Completed")){
             request.setStatus("Rejected");
         }
 
-        requestDao.update(request);
+        requestDao.save(request);
     }
 
     public void completeRequest(ActivityRequest request){
@@ -134,20 +136,20 @@ public class ActivityRequestService {
             activity.setStatus("Completed");
             request.setStatus("Approved");
 
-            activityDao.update(activity);
+            activityDao.save(activity);
         } else if(status.equals("Completed")){
             request.setStatus("Rejected");
         }
 
-        requestDao.update(request);
+        requestDao.save(request);
     }
 
     public void rejectRequest(ActivityRequest request){
         request.setStatus("Rejected");
-        requestDao.update(request);
+        requestDao.save(request);
     }
 
     public List<ActivityRequest> getRequests() {
-        return requestDao.getRequests();
+        return requestDao.findAll();
     }
 }

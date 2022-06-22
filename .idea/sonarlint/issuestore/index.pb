@@ -13,8 +13,6 @@ I
 src/main/webapp/index.jsp,8\e\8e6d3b70c9f5b02570779b0441540d45eceb0ded
 i
 9src/main/java/com/spring_final/filter/EncodingFilter.java,1\3\13bab9992ce0412a6958d8853a38d42506b6d175
-t
-Dsrc/main/java/com/spring_final/filter/AdminAuthenticationFilter.java,7\f\7fa17c58b3b3abba01167ee85b4e52071b51fcb6
 O
 src/main/webapp/WEB-INF/web.xml,2\e\2e22b6edd746fa3dc40ad7276c87c8d87d72a392
 c
@@ -29,13 +27,7 @@ g
 7src/main/java/com/spring_final/controller/MarkTime.java,1\1\11cf59b7811d2663865bf4f35798432305290c14
 m
 =src/main/java/com/spring_final/daos/TypesOfActivitiesDao.java,4\0\40c0756956743b28231b55a2534ff7a446bca389
-j
-:src/main/java/com/spring_final/controller/AddActivity.java,6\9\69603725ffc416a8a3d1a0a3dbcd71440adc460d
-l
-<src/main/java/com/spring_final/controller/RejectRequest.java,9\1\91958e0de04232cdaa150fb76b9b3e7eaadbb371
 f
 6src/main/java/com/spring_final/controller/AddType.java,7\9\79926e432ed613f8790e7f4c9ecf72d08ca8eb69
-o
-?src/main/java/com/spring_final/configuration/ConfigProject.java,3\d\3d8ca2587cb7a6823e3a3b3bda5613f95e40b5ba
 s
 Csrc/main/java/com/spring_final/configuration/MyFrontController.java,7\2\72d6df0480951818f27e0e50c81a821fe5ae213b

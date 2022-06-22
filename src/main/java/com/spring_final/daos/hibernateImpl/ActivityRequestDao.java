@@ -15,10 +15,10 @@ import java.util.List;
 @Transactional
 public class ActivityRequestDao {
 
-    @Autowired
-    private SessionFactory sessionFactory;
-    @Autowired
-    private UserDao userDao;
+    //@Autowired
+    private SessionFactory sessionFactory = null;
+    //@Autowired
+    private UserDao userDao = new UserDao();
 
     public void addRequest(ActivityRequest request){
         sessionFactory.getCurrentSession().save(request);

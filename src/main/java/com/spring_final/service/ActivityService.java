@@ -1,5 +1,6 @@
 package com.spring_final.service;
 
+import com.spring_final.daos.ActivityDaoRep;
 import com.spring_final.daos.hibernateImpl.ActivityDao;
 import com.spring_final.model.Activity;
 import com.spring_final.model.User;
@@ -13,55 +14,55 @@ import java.util.List;
 public class ActivityService {
 
     @Autowired
-    private ActivityDao activityDao;
+    private ActivityDaoRep activityDao;
 
     public void addActivity(Activity activity){
-        activityDao.addActivity(activity);
+        activityDao.save(activity);
     }
 
     public Activity getActivity(int id){
-        return activityDao.getActivity(id);
+        return activityDao.getOne(id);
     }
 
     public Activity getActivity(String name){
-        return activityDao.getActivity(name);
+        return activityDao.getByName(name);
     }
 
     public List<Activity> getActivities(){
-        return activityDao.getActivities();
+        return activityDao.findAll();
     }
 
     public int getNumberOfActivities(){
-        return activityDao.getNumberOfActivities();
+        return 10;
     }
 
-    public List<Activity> getActivitiesInLimit(int size, int page){
-        return activityDao.getActivitiesInLimit(size, page);
-    }
+   // public List<Activity> getActivitiesInLimit(int size, int page){
+     //   return activityDao.getActivitiesInLimit(size, page);
+   // }
 
-    public List<Activity> getActivitiesInLimitByName(int size, int page) {
-        return activityDao.getActivitiesInLimitByName(size, page);
-    }
+   // public List<Activity> getActivitiesInLimitByName(int size, int page) {
+     //   return activityDao.getActivitiesInLimitByName(size, page);
+   // }
 
-    public List<Activity> getActivitiesInLimitByType(int size, int page) {
-        return activityDao.getActivitiesInLimitByType(size, page);
-    }
+   // public List<Activity> getActivitiesInLimitByType(int size, int page) {
+     //   return activityDao.getActivitiesInLimitByType(size, page);
+   // }
 
     @Transactional
     public void deleteActivity(int id){
-        activityDao.delete(id);
+        activityDao.deleteById(id);
     }
 
     public void takeActivityTime(int id, User user, int duration){
-        Activity activity = activityDao.getActivity(id);
+        Activity activity = activityDao.getOne(id);
         if(activity.getStatus().equals("Active")){
             activity.setDuration(duration);
-            activityDao.update(activity);
+            activityDao.save(activity);
         }
     }
 
     @Transactional
     public void updateActivity(Activity activity){
-        activityDao.update(activity);
+        activityDao.save(activity);
     }
 }

@@ -1,5 +1,9 @@
 package com.spring_final.service;
 
+import com.spring_final.daos.ActivityDaoRep;
+import com.spring_final.daos.ActivityRequestDaoRep;
+import com.spring_final.daos.TypesOfActivitiesDaoRep;
+import com.spring_final.daos.UserDaoRep;
 import com.spring_final.daos.hibernateImpl.ActivityDao;
 import com.spring_final.daos.hibernateImpl.ActivityRequestDao;
 import com.spring_final.daos.hibernateImpl.TypesOfActivitiesDao;
@@ -17,44 +21,44 @@ import java.util.Set;
 public class UserService {
 
     @Autowired
-    private UserDao userDao;
+    private UserDaoRep userDao;
     @Autowired
-    private ActivityDao activityDao;
+    private ActivityDaoRep activityDao;
     @Autowired
-    private ActivityRequestDao requestDao;
+    private ActivityRequestDaoRep requestDao;
     @Autowired
-    private TypesOfActivitiesDao typeDao;
+    private TypesOfActivitiesDaoRep typeDao;
 
     public void addUser(User user){
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(10)));
-        userDao.addUser(user);
+        userDao.save(user);
         User foundUser = getUser(user.getUsername());
         if(foundUser != null)
             setAuthority(foundUser, Authority.getUserAuthority());
     }
 
     public User getUser(int id){
-        return userDao.getUser(id);
+        return userDao.getOne(id);
     }
 
     public User getUser(String username){
-        return userDao.getUser(username);
+        return userDao.getByUsername(username);
     }
 
     public List<User> getUsers(){
-        return userDao.getUsers();
+        return userDao.findAll();
     }
 
     public int getNumberOfUsers(){
-        return userDao.getNumberOfUsers();
+        return 10;
     }
 
-    public List<User> getUsersInLimit(int size, int page){
-        return userDao.getUsersInLimit(size, page);
-    }
+   // public List<User> getUsersInLimit(int size, int page){
+     //   return userDao.getUsersInLimit(size, page);
+   // }
 
     public void deleteUser(int id){
-        userDao.delete(id);
+        userDao.deleteById(id);
     }
 
     public void updateProfile(User user){
@@ -62,14 +66,14 @@ public class UserService {
         user.setGender(foundUser.getGender());
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(10)));
         user.setAuthorities(foundUser.getAuthorities());
-        userDao.update(user);
+        userDao.save(user);
     }
 
     public void updateUser(User user){
         User foundUser = getUser(user.getId());
         user.setPassword(foundUser.getPassword());
         user.setAuthorities(foundUser.getAuthorities());
-        userDao.update(user);
+        userDao.save(user);
     }
 
     public void setAuthority(User user, Authority authority){
@@ -78,12 +82,12 @@ public class UserService {
             if(currentAuthority == authority)
                 return;
         }
-        userDao.setAuthority(user.getId(), authority);
+        userDao.setAuthority(user.getId(), authority.getId());
     }
 
     public void deleteAuthority(int userId, Authority authority){
-        User user = userDao.getUser(userId);
+        User user = userDao.getOne(userId);
         user.getAuthorities().remove(authority);
-        userDao.update(user);
+        userDao.save(user);
     }
 }

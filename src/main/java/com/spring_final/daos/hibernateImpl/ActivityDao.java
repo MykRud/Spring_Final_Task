@@ -22,8 +22,8 @@ import java.util.List;
 @Transactional
 public class ActivityDao {
 
-   @Autowired
-   private SessionFactory sessionFactory;
+   //@Autowired
+   private SessionFactory sessionFactory = null;
 
    public void addActivity(Activity activity){
       sessionFactory.getCurrentSession().save(activity);

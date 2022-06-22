@@ -3,6 +3,7 @@ package com.spring_final.daos.hibernateImpl;
 import com.spring_final.model.Authority;
 import com.spring_final.model.User;
 import org.hibernate.SessionFactory;
+import org.hibernate.internal.SessionFactoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,8 +15,8 @@ import java.util.List;
 @Transactional
 public class UserDao {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    //@Autowired
+    private SessionFactory sessionFactory = null;
 
     public void addUser(User user){
         sessionFactory.getCurrentSession().save(user);

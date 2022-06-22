@@ -1,6 +1,7 @@
 package com.spring_final.daos;
 
 import com.spring_final.model.Activity;
+import com.spring_final.model.TypeOfActivity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,26 +12,26 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface ActivityDaoRep extends JpaRepository<Activity, Integer> {
+public interface TypesOfActivitiesDaoRep extends JpaRepository<TypeOfActivity, Integer> {
 
     @Override
-    List<Activity> findAll();
+    List<TypeOfActivity> findAll();
 
     @Override
-    Activity getOne(Integer integer);
-
-    Activity getByName(String name);
+    Page<TypeOfActivity> findAll(Pageable pageable);
 
     @Override
-    Page<Activity> findAll(Pageable pageable);
+    TypeOfActivity getOne(Integer integer);
+
+    TypeOfActivity getByName(String name);
 
     @Override
-    <S extends Activity> S save(S entity);
+    <S extends TypeOfActivity> S save(S entity);
 
     @Override
     void deleteById(Integer integer);
 
     @Override
-    void delete(Activity entity);
+    void delete(TypeOfActivity entity);
 
 }
