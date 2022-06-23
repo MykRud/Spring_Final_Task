@@ -142,21 +142,21 @@
                                     <span>
                                         
                                         <c:set var="daysF"
-                                        value="${Math.floor( activity.duration/60/24 )}"/>
+                                        value="${Math.floor( activity.duration/24/60 )}"/>
                                         <fmt:formatNumber var="days" type="number" value="${daysF}" maxFractionDigits="0"/>
                                         ${days}
                                     </span>
                                     <span><fmt:message key="activities.activity.duration.days"/></span>
                                     <span>
                                          <c:set var="hoursF"
-                                        value="${Math.floor( activity.duration/60 - days*24 )}"/>
+                                        value="${Math.floor( activity.duration/60%24 )}"/>
                                         <fmt:formatNumber var="hours" type="number" value="${hoursF}" maxFractionDigits="0"/>
                                         ${hours}
                                     </span>
                                     <span><fmt:message key="activities.activity.duration.hours"/></span>
                                     <span>
                                         <c:set var="minutesF"
-                                        value="${Math.floor( activity.duration - hours*60 - days*24*60 )}"/>
+                                        value="${Math.floor(activity.duration%60) }"/>
                                         <fmt:formatNumber var="minutes" type="number" value="${minutesF}" maxFractionDigits="0"/>
                                         ${minutes}
                                     </span>

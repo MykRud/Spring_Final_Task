@@ -3,16 +3,10 @@
 0src/main/webapp/WEB-INF/tags/time-management.tld,6\9\69a8dd8d0bb77bf1b0e4ee088f2f122a43fefaac
 I
 src/main/webapp/login.jsp,8\5\85ee523d01e5e19376db640e846c91bbcb0a1c22
-e
-5src/main/java/com/spring_final/filter/AuthFilter.java,c\f\cff5fa2364bc3b52a6e2d32e8288d2f287b71699
-m
-=src/main/java/com/spring_final/filter/LocalizationFilter.java,7\a\7a4894b70d7a167f502d8decf85962d40bb69ac9
 d
 4src/main/java/com/spring_final/tag/AuthorityTag.java,e\8\e86ed492de600d1c6cca3f224f3d09bf1d10b406
 I
 src/main/webapp/index.jsp,8\e\8e6d3b70c9f5b02570779b0441540d45eceb0ded
-i
-9src/main/java/com/spring_final/filter/EncodingFilter.java,1\3\13bab9992ce0412a6958d8853a38d42506b6d175
 O
 src/main/webapp/WEB-INF/web.xml,2\e\2e22b6edd746fa3dc40ad7276c87c8d87d72a392
 c
@@ -25,7 +19,5 @@ g
 7src/main/java/com/spring_final/controller/MarkTime.java,1\1\11cf59b7811d2663865bf4f35798432305290c14
 m
 =src/main/java/com/spring_final/daos/TypesOfActivitiesDao.java,4\0\40c0756956743b28231b55a2534ff7a446bca389
-f
-6src/main/java/com/spring_final/controller/AddType.java,7\9\79926e432ed613f8790e7f4c9ecf72d08ca8eb69
 s
 Csrc/main/java/com/spring_final/configuration/MyFrontController.java,7\2\72d6df0480951818f27e0e50c81a821fe5ae213b

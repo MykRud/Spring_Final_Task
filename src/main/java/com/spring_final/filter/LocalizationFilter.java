@@ -1,14 +1,19 @@
 package com.spring_final.filter;
 
 
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@Component
-public class LocalizationFilter implements Filter {
+@WebFilter(urlPatterns = "/*", dispatcherTypes = {DispatcherType.REQUEST})
+@Order(Ordered.LOWEST_PRECEDENCE - 4)
+public class LocalizationFilter extends HttpFilter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

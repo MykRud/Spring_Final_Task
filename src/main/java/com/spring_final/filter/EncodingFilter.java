@@ -1,12 +1,18 @@
 package com.spring_final.filter;
 
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpFilter;
 import java.io.IOException;
 
-@Controller
-public class EncodingFilter implements Filter {
+@WebFilter(urlPatterns = "/*", dispatcherTypes = {DispatcherType.REQUEST})
+@Order(Ordered.LOWEST_PRECEDENCE - 3)
+public class EncodingFilter extends HttpFilter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         servletRequest.setCharacterEncoding("UTF-8");
