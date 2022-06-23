@@ -25,10 +25,10 @@ public interface ActivityDaoRep extends JpaRepository<Activity, Integer> {
     Activity getByName(String name);
 
     @Query(
-            value = "SELECT * FROM activity ac LEFT JOIN activityrequest req ON ac.id=req.activity_id where (req.action='Add' AND req.status='Approved') OR req.activity_id IS NULL group by ac.id order by count(req.activity_id) LIMIT :page,:size",
+            value = "SELECT *, count(req.activity_id) AS number_of_users FROM activity ac LEFT JOIN activityrequest req ON ac.id=req.activity_id where (req.action='Add' AND req.status='Approved') OR req.activity_id IS NULL group by ac.id",
             nativeQuery = true
     )
-    List<Activity> findByNumberOfUsers(@Param("page") int page, @Param("size") int size);
+    List<Activity> findByNumberOfUsers(Pageable pageable);
 
     @Override
     long count();

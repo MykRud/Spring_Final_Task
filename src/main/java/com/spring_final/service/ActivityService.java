@@ -75,12 +75,12 @@ public class ActivityService {
     }
 
     public List<Activity> getActivitiesInLimitByType(int size, int page) {
-        Pageable pages = PageRequest.of(page, size, Sort.by("type.id"));
+        Pageable pages = PageRequest.of(page, size, Sort.by("type_id"));
         return activityDao.findAll(pages).toList();
     }
 
     public List<Activity> getActivitiesInLimitByNumberOfUsers(int size, int page) {
-        //Pageable pages = PageRequest.of(page, size);
-        return activityDao.findByNumberOfUsers(size * page, size);
+        Pageable pages = PageRequest.of(page, size, Sort.by("number_of_users").descending());
+        return activityDao.findByNumberOfUsers(pages);
     }
 }

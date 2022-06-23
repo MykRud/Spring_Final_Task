@@ -76,13 +76,17 @@
                         </label>
 
                         <select name="sort" class="form-control" id="type">
-                            <option value="by-name">
+
+                            
+                            <option value="by-name" ${requestScope.sort == 'by-name' ? 'selected' : ''}>
                                     <fmt:message key="activities.sorting.method.by.name"/>
                             </option>
-                            <option value="by-category">
+                            
+                            <option value="by-category" ${requestScope.sort == 'by-category' ? 'selected' : ''}>
                                     <fmt:message key="activities.sorting.method.by.category"/>
                             </option>
-                            <option value="by-users">
+                           
+                            <option value="by-users" ${requestScope.sort == 'by-users' ? 'selected' : ''}>
                                     <fmt:message key="activities.sorting.method.by.number.of.users"/>
                             </option>
                         </select>

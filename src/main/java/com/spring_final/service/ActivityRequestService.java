@@ -157,7 +157,7 @@ public class ActivityRequestService {
     }
 
     public List<ActivityRequest> getRequestsInLimit(int page, int size) {
-        Pageable pages = PageRequest.of(page, size);
+        Pageable pages = PageRequest.of(page, size, Sort.Direction.DESC);
         return requestDao.findAll(pages).toList();
 
     }
