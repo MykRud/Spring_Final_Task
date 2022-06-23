@@ -1,10 +1,5 @@
 package com.spring_final.model;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
 import javax.persistence.Entity;
 import java.io.Serializable;
@@ -33,9 +28,9 @@ public class User implements Serializable{
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade=CascadeType.REMOVE)
     private Set<ActivityRequest> activityRequests = new HashSet<>();
 
-    public User(int id, String firstName, String lastName, String username, String password, int age, String contact, String gender) {
+    public User(int id, String firstname, String lastName, String username, String password, int age, String contact, String gender) {
         this.id = id;
-        this.firstName = firstName;
+        this.firstName = firstname;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
@@ -44,8 +39,8 @@ public class User implements Serializable{
         this.gender = gender;
     }
 
-    public User(String firstName, String lastName, String username, String password, int age, String contact, String gender) {
-        this(0, firstName, lastName, username, password, age, contact, gender);
+    public User(String firstname, String lastName, String username, String password, int age, String contact, String gender) {
+        this(0, firstname, lastName, username, password, age, contact, gender);
     }
 
     public User() {

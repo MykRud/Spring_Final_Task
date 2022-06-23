@@ -27,7 +27,7 @@ public interface ActivityRequestDaoRep extends JpaRepository<ActivityRequest, In
     <S extends ActivityRequest> S save(S entity);
 
     @Override
-    ActivityRequest getOne(Integer integer);
+    Optional<ActivityRequest> findById(Integer integer);
 
     @Query("FROM ActivityRequest WHERE user_id = :userId AND activity_id = :activityId")
     List<ActivityRequest> findByUserIdAndActivityId(@Param("userId") Integer userId, @Param("activityId") Integer activityId);

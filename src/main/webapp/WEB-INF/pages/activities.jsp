@@ -67,27 +67,30 @@
                     </c:if>
                 </div>
 
+
                 <div class="col-md-4">
-                    <form method="post" action="pages/activities">
-                    <label class="col-form-label" for="type">
-                        <fmt:message key="activities.sorting.label"/>
-                    </label>
-                    <select name="sort-methods" class="form-control" id="type">
-                        <option value="by-name" name="by-name">
-                            <fmt:message key="activities.sorting.method.by.name"/>
-                        </option>
-                        <option value="by-category" name="by-category">
-                            <fmt:message key="activities.sorting.method.by.category"/>
-                        </option>
-                        <option value="by-users" name="by-users">
-                            <fmt:message key="activities.sorting.method.by.number.of.users"/>
-                        </option>
-                    </select>
+                    <form method="get" action="activities">
+
+                        <label class="col-form-label" for="type">
+                            <fmt:message key="activities.sorting.label"/>
+                        </label>
+
+                        <select name="sort" class="form-control" id="type">
+                            <option value="by-name">
+                                    <fmt:message key="activities.sorting.method.by.name"/>
+                            </option>
+                            <option value="by-category">
+                                    <fmt:message key="activities.sorting.method.by.category"/>
+                            </option>
+                            <option value="by-users">
+                                    <fmt:message key="activities.sorting.method.by.number.of.users"/>
+                            </option>
+                        </select>
                 
-                <div class="col mt-2">
-                    <input class="btn btn-primary" value="<fmt:message key="sort.button.submit"/>"
-                        type="submit">
-                    </div>
+                        <div class="col mt-2">
+                            <input class="btn btn-primary" value="<fmt:message key="sort.button.submit"/>"
+                            type="submit">
+                        </div>
                 </form>
             </div>
             

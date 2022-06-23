@@ -5,6 +5,9 @@ import com.spring_final.daos.hibernateImpl.ActivityDao;
 import com.spring_final.model.Activity;
 import com.spring_final.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -21,7 +24,7 @@ public class ActivityService {
     }
 
     public Activity getActivity(int id){
-        return activityDao.getOne(id);
+        return activityDao.findById(id).get();
     }
 
     public Activity getActivity(String name){
@@ -33,7 +36,7 @@ public class ActivityService {
     }
 
     public int getNumberOfActivities(){
-        return 10;
+        return (int) activityDao.count();
     }
 
    // public List<Activity> getActivitiesInLimit(int size, int page){
@@ -54,7 +57,7 @@ public class ActivityService {
     }
 
     public void takeActivityTime(int id, User user, int duration){
-        Activity activity = activityDao.getOne(id);
+        Activity activity = activityDao.findById(id).get();
         if(activity.getStatus().equals("Active")){
             activity.setDuration(duration);
             activityDao.save(activity);
@@ -64,5 +67,20 @@ public class ActivityService {
     @Transactional
     public void updateActivity(Activity activity){
         activityDao.save(activity);
+    }
+
+    public List<Activity> getActivitiesInLimitByName(int size, int page) {
+        Pageable pages = PageRequest.of(page, size, Sort.by("name"));
+        return activityDao.findAll(pages).toList();
+    }
+
+    public List<Activity> getActivitiesInLimitByType(int size, int page) {
+        Pageable pages = PageRequest.of(page, size, Sort.by("type.id"));
+        return activityDao.findAll(pages).toList();
+    }
+
+    public List<Activity> getActivitiesInLimitByNumberOfUsers(int size, int page) {
+        //Pageable pages = PageRequest.of(page, size);
+        return activityDao.findByNumberOfUsers(size * page, size);
     }
 }

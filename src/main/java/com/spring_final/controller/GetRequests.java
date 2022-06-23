@@ -26,7 +26,7 @@ public class GetRequests {
         int numberOfRequests = requestService.getNumberOfRequests();
         int totalPages = (int) Math.ceil((double) numberOfRequests /
                 (double) size);
-        List<ActivityRequest> requests = requestService.getRequests();
+        List<ActivityRequest> requests = requestService.getRequestsInLimit(page, size);
 
         mv.addObject("requests", requests);
         mv.addObject("currentPage", page);

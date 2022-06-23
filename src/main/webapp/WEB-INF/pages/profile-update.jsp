@@ -170,13 +170,10 @@
                        
                             <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error!</div></div>
                             <!-- Submit Button-->
-                            <fmt:message key="users.update.button.submit" var="submitPl" />
-                            <button class="btn btn-primary btn-xl"
-                                       value="submitPl"
-                                       type="submit">
-                            <!--<button class="btn btn-primary btn-xl" id="submitButton" type="submit">
+
+                            <button class="btn btn-primary btn-xl" id="submitButton" type="submit">
                                 <fmt:message key="users.update.button.submit"/>
-                            </button>-->
+                            </button>
                         </form:form>
                     </div>
                 </div>

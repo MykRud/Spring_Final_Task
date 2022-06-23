@@ -23,7 +23,7 @@ public class TypeOfActivityService {
     }
 
     public TypeOfActivity findType(int id){
-        return typeDao.getOne(id);
+        return typeDao.findById(id).get();
     }
 
     public TypeOfActivity findType(String name){

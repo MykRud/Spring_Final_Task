@@ -1,6 +1,5 @@
 package com.spring_final.controller;
 
-import com.spring_final.model.Authority;
 import com.spring_final.model.User;
 import com.spring_final.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

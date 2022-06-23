@@ -23,7 +23,7 @@ public interface UserDaoRep extends JpaRepository<User, Integer> {
     List<User> findAll();
 
     @Override
-    User getOne(Integer integer);
+    Optional<User> findById(Integer integer);
 
     User getByUsername(String username);
 

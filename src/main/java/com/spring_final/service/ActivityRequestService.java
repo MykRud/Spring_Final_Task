@@ -8,6 +8,9 @@ import com.spring_final.model.Activity;
 import com.spring_final.model.ActivityRequest;
 import com.spring_final.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -29,7 +32,7 @@ public class ActivityRequestService {
     }
 
     public ActivityRequest getRequest(int id){
-        return requestDao.getOne(id);
+        return requestDao.findById(id).get();
     }
 
     public int getNumberOfRequests(){
@@ -151,5 +154,11 @@ public class ActivityRequestService {
 
     public List<ActivityRequest> getRequests() {
         return requestDao.findAll();
+    }
+
+    public List<ActivityRequest> getRequestsInLimit(int page, int size) {
+        Pageable pages = PageRequest.of(page, size);
+        return requestDao.findAll(pages).toList();
+
     }
 }

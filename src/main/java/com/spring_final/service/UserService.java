@@ -38,7 +38,7 @@ public class UserService {
     }
 
     public User getUser(int id){
-        return userDao.getOne(id);
+        return userDao.findById(id).get();
     }
 
     public User getUser(String username){
@@ -48,14 +48,6 @@ public class UserService {
     public List<User> getUsers(){
         return userDao.findAll();
     }
-
-    public int getNumberOfUsers(){
-        return 10;
-    }
-
-   // public List<User> getUsersInLimit(int size, int page){
-     //   return userDao.getUsersInLimit(size, page);
-   // }
 
     public void deleteUser(int id){
         userDao.deleteById(id);
@@ -86,7 +78,7 @@ public class UserService {
     }
 
     public void deleteAuthority(int userId, Authority authority){
-        User user = userDao.getOne(userId);
+        User user = userDao.findById(userId).get();
         user.getAuthorities().remove(authority);
         userDao.save(user);
     }

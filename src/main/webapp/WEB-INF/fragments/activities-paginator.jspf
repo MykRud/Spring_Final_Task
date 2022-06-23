@@ -15,7 +15,7 @@
                     </c:if>
                     <c:if test="${c != requestScope.pageSize}">
                         <a class="page-link"
-                           href="${pageContext.request.contextPath}/pages/activities?page=${requestScope.currentPage}&size=${c}">
+                           href="activities?page=${requestScope.currentPage}&size=${c}&sort=${sort}">
                                 ${c}
                         </a>
                     </c:if>
@@ -27,7 +27,7 @@
         <ul class="pagination">
             <li class="page-item ${requestScope.currentPage == 0 ? 'disabled' : ''}">
                 <a class="page-link"
-                   href="${pageContext.request.contextPath}/pages/activities?page=${requestScope.currentPage < 1 ? 0 : requestScope.currentPage - 1}&size=${requestScope.pageSize}">
+                   href="activities?page=${requestScope.currentPage < 1 ? 0 : requestScope.currentPage - 1}&size=${requestScope.pageSize}&sort=${sort}">
                     <fmt:message key="paginator.previous"/>
                 </a>
             </li>
@@ -43,7 +43,7 @@
                     </c:if>
                     <c:if test="${i != requestScope.currentPage}">
                         <a class="page-link"
-                           href="${pageContext.request.contextPath}/pages/activities?page=${i}&size=${requestScope.pageSize}">
+                           href="activities?page=${i}&size=${requestScope.pageSize}&sort=${sort}">
                                 ${i + 1}
                         </a>
                     </c:if>
@@ -58,7 +58,7 @@
             </c:if>
             <li class="page-item ${requestScope.currentPage == requestScope.totalPages - 1 ? 'disabled' : ''}">
                 <a class="page-link"
-                   href="${pageContext.request.contextPath}/pages/activities?page=${requestScope.currentPage + 1}&size=${requestScope.pageSize}">
+                   href="activities?page=${requestScope.currentPage + 1}&size=${requestScope.pageSize}&sort=${sort}">
                     <fmt:message key="paginator.next"/>
                 </a>
             </li>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional
@@ -21,7 +22,7 @@ public interface TypesOfActivitiesDaoRep extends JpaRepository<TypeOfActivity, I
     Page<TypeOfActivity> findAll(Pageable pageable);
 
     @Override
-    TypeOfActivity getOne(Integer integer);
+    Optional<TypeOfActivity> findById(Integer integer);
 
     TypeOfActivity getByName(String name);
 

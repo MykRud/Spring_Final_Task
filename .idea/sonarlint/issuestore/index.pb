@@ -22,8 +22,6 @@ e
 j
 :src/main/java/com/spring_final/controller/GetActivity.java,8\a\8ac2ea6ce4aa13a31164f8d0246d91c76a9b269d
 g
-7src/main/java/com/spring_final/controller/GetUsers.java,0\4\045f65366ed180066e4594455e7b768d6c925e03
-g
 7src/main/java/com/spring_final/controller/MarkTime.java,1\1\11cf59b7811d2663865bf4f35798432305290c14
 m
 =src/main/java/com/spring_final/daos/TypesOfActivitiesDao.java,4\0\40c0756956743b28231b55a2534ff7a446bca389

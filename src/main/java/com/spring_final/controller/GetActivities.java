@@ -27,17 +27,20 @@ public class GetActivities {
                 (double) size);
         List<Activity> activities = null;
 
-        //if(sort.equals("by-name"))
-          //  activities = service.getActivitiesInLimitByName(size, page);
-        //else if(sort.equals("by-category"))
-          //  activities = service.getActivitiesInLimitByType(size, page);
+        if(sort.equals("by-name"))
+            activities = service.getActivitiesInLimitByName(size, page);
+        else if(sort.equals("by-category"))
+            activities = service.getActivitiesInLimitByType(size, page);
+        else if(sort.equals("by-users"))
+            activities = service.getActivitiesInLimitByNumberOfUsers(size, page);
 
-        activities = service.getActivities();
+        //activities = service.getActivities();
 
         mv.addObject("activities", activities);
         mv.addObject("currentPage", page);
         mv.addObject("pageSize", size);
         mv.addObject("totalPages", totalPages);
+        mv.addObject("sort", sort);
         mv.setViewName("WEB-INF/pages/activities");
         return mv;
     }
